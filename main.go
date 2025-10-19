@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/sudozinmintun/golangrestapi/dbconfig"
 	"github.com/sudozinmintun/golangrestapi/internal/handlers"
 	"github.com/sudozinmintun/golangrestapi/internal/routes"
 	"github.com/sudozinmintun/golangrestapi/serverconfig"
@@ -16,6 +17,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("Could not load config: %v", err)
 	}
+
+	db := dbconfig.ConnectDB(config.DatabaseURL)
+	defer db.Close()
 
 	handler := handlers.NewHandler()
 
