@@ -8,6 +8,7 @@ import (
 	"github.com/sudozinmintun/golangrestapi/dbconfig"
 	"github.com/sudozinmintun/golangrestapi/internal/handlers"
 	"github.com/sudozinmintun/golangrestapi/internal/routes"
+	"github.com/sudozinmintun/golangrestapi/internal/store"
 	"github.com/sudozinmintun/golangrestapi/serverconfig"
 )
 
@@ -21,7 +22,8 @@ func main() {
 	db := dbconfig.ConnectDB(config.DatabaseURL)
 	defer db.Close()
 
-	handler := handlers.NewHandler()
+	queries := store.New(db)
+	handler := handlers.NewHandler(db, queries)
 
 	mux := http.NewServeMux()
 

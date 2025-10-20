@@ -1,0 +1,8 @@
+POST http://localhost:8081/user/register
+Content-Type: application/json
+
+{
+  "username": "AdminUser1",
+  "email": "adminuser1@gmail.com",
+  "password": "TestPassword123"
+}
